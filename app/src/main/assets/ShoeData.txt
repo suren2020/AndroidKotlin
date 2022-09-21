@@ -1,0 +1,16 @@
+Wanders         Wanderer        9   Travelling Companion
+Bamboo & Ivy    Ivy League      9   In the best league
+Glove           Perfect Fit     7   Comfortable fit
+Sole            Soulmate        8   Cannot be forgotten
+Starlight       Light Foot      7   Be on the cloud
+Levelup         Urban Leather   8   Comfort feet
+Stablers        Stable Shoes    9   Stable and comfortable
+Solemates       Soul Shoes      9   Cant step out without them
+Metro Kicks     Metro Shoes     8   Perfect for on and about the city
+Perfect Pair    Perfect Shoes   8   Best shoes for a perfect fit
+Cloudveil       Cloud 9 Shoes   7   Feel like walking on a cloud with light footsteps
+Tredlight       Light Fit Shoes 9   Light and feels like wearing no shoes
+Cloudwalk       Cloud Nine Shoes    9   Feels like not wearing shoes
+RightFit        Right Companion 9   Close fit and comfy
+UltraComfy      Ultra Shoes     9   For that Ultra comfort
+Companion       Companion Shoes 9   Friend for the feet
