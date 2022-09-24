@@ -50,10 +50,7 @@ class ShoelistingFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-/*        val itemId: Int = item.itemId;
-        val itemTitle: String = item.title as String
-        Toast.makeText(context, "onOptionsItemSelected $itemId $itemTitle", Toast.LENGTH_SHORT).show()*/
-        // return NavigationUI.onNavDestinationSelected(
+
         if (item.itemId == R.id.loginFragment) {
             val navController = requireView().findNavController()
             navController.navigate(R.id.loginFragment)
@@ -82,6 +79,7 @@ class ShoelistingFragment : Fragment() {
 
         val viewModelFactory = ShoelistViewModelFactory(app)
         viewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(ShoelistingFragmentViewModel::class.java)
+
         var mListView = view.findViewById<ListView>(R.id.shoeListView)
 
 

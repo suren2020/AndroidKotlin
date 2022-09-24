@@ -12,9 +12,6 @@ import java.io.InputStream
 
 class ShoelistViewModelFactory (val appContext: Context): ViewModelProvider.Factory {
 
-    /*     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return   modelClass.getConstructor(Application::class.java).newInstance(arg)
-        }*/
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ShoelistingFragmentViewModel::class.java)) {
             return ShoelistingFragmentViewModel(appContext) as T
@@ -22,6 +19,7 @@ class ShoelistViewModelFactory (val appContext: Context): ViewModelProvider.Fact
         throw IllegalArgumentException("Unknown View Model Class")
     }
 }
+
 class ShoelistingFragmentViewModel(appContext: Context): AndroidViewModel(appContext as Application) {
 
     var shoeList: MutableList<String>

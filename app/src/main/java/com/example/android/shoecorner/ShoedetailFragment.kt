@@ -1,21 +1,32 @@
 package com.example.android.shoecorner
 
+// import android.R
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+// import com.example.android.shoecorner.BR.shoeDetails
+import com.example.android.shoecorner.databinding.FragmentShoedetailBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+lateinit var shoeDetailBinding: FragmentShoedetailBinding
+private lateinit var shoedetailViewModel: ShoedetailFragmentViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -40,40 +51,33 @@ class ShoedetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shoedetail, container, false)
+
+        var app : Context = this.requireContext().applicationContext
+
+        val viewModelFactory = ShoedetailViewModelFactory(app)
+        shoedetailViewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(ShoedetailFragmentViewModel::class.java)
+
+        shoeDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoedetail, container, false)
+
+        shoeDetailBinding.cancelButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_shoedetailFragment_to_shoelistingFragment)
+        }
+
+        shoeDetailBinding.saveButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_shoedetailFragment_to_shoelistingFragment)
+        }
+
+        shoeDetailBinding.viewModel = shoedetailViewModel
+
+        shoeDetailBinding.lifecycleOwner = this
+
+        return shoeDetailBinding.root
+
+        // return inflater.inflate(R.layout.fragment_shoedetail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Action for the cancel button
-        val cancelButton = view.findViewById<Button>(R.id.cancelButton)
-        cancelButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_shoedetailFragment_to_shoelistingFragment)
-        )
-
-        val saveButton = view.findViewById<Button>(R.id.saveButton)
-
-        saveButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                val shoedetailFrag = view?.findFragment<Fragment>()
-                val shoedetailFragView: View? = shoedetailFrag?.view
-                val shoeNameEditText = shoedetailFragView?.findViewById<EditText>(R.id.shoename)
-                val shoeCompanyEditText = shoedetailFragView?.findViewById<EditText>(R.id.company)
-                val shoeSizeEditText = shoedetailFragView?.findViewById<EditText>(R.id.shoesize)
-                val shoeDescriptionEditText = shoedetailFragView?.findViewById<EditText>(R.id.shoedescription)
-                if (shoeNameEditText?.text.toString() == "" || shoeCompanyEditText?.text.toString() == "" ||
-                    shoeSizeEditText?.text.toString() == "" || shoeDescriptionEditText?.text.toString() == "") {
-                    Toast.makeText(activity, "Enter all the shoe details to save", Toast.LENGTH_SHORT).show()
-                }
-                else {
-                    var message = shoeNameEditText?.text.toString() + "\t\t" + shoeCompanyEditText?.text.toString() +
-                            "\t\t" + shoeSizeEditText?.text.toString() + "\t" + shoeDescriptionEditText?.text.toString()
-                    addShoeData(message)
-                    view?.findNavController()?.navigate(R.id.action_shoedetailFragment_to_shoelistingFragment)
-                }
-            }
-        })
     }
 
     fun addShoeData(message: String) {
